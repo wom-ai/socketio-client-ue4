@@ -375,10 +375,18 @@ void USocketIOClientComponent::ConnectNative(const FString& InAddressAndPort, co
 	{
 		QueryFJson = Query;
 	}
+	else
+	{
+		QueryFJson = MakeShareable(new FJsonObject);
+	}
 
 	if (Headers.IsValid())
 	{
 		HeadersFJson = Headers;
+	}
+	else
+	{
+		HeadersFJson = MakeShareable(new FJsonObject);
 	}
 	NativeClient->Connect(InAddressAndPort, QueryFJson, HeadersFJson);
 }
