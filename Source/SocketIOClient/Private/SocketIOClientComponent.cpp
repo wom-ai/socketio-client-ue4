@@ -368,7 +368,19 @@ void USocketIOClientComponent::Connect(const FString& InAddressAndPort, USIOJson
 
 void USocketIOClientComponent::ConnectNative(const FString& InAddressAndPort, const TSharedPtr<FJsonObject>& Query /*= nullptr*/, const TSharedPtr<FJsonObject>& Headers /*= nullptr*/)
 {
-	NativeClient->Connect(InAddressAndPort, Query, Headers);
+	TSharedPtr<FJsonObject> QueryFJson;
+	TSharedPtr<FJsonObject> HeadersFJson;
+
+	if (Query.IsValid())
+	{
+		QueryFJson = Query;
+	}
+
+	if (Headers.IsValid())
+	{
+		HeadersFJson = Headers;
+	}
+	NativeClient->Connect(InAddressAndPort, QueryFJson, HeadersFJson);
 }
 
 void USocketIOClientComponent::Disconnect()
