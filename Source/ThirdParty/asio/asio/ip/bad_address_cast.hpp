@@ -24,7 +24,7 @@ namespace asio {
 namespace ip {
 
 /// Thrown to indicate a failed address conversion.
-class bad_address_cast : public std::bad_cast
+class bad_address_cast : public std::exception
 {
 public:
   /// Default constructor.
