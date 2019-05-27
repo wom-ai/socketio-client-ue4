@@ -360,6 +360,23 @@ void USocketIOClientComponent::Connect(const FString& InAddressAndPort, USIOJson
 		HeadersFJson = Headers->GetRootObject();
 	}
 
+	//If we're a regular connection we should close and release when we quit
+	if (NativeClient&&!bPluginScopedConnection)
+	{
+		ISocketIOClientModule::Get().ReleaseNativePointer(NativeClient);
+		NativeClient = nullptr;
+	}
+	//Because our connections can last longer than game world 
+	//end, we let plugin-scoped structures manage our memory
+	if (bPluginScopedConnection)
+	{
+		NativeClient = ISocketIOClientModule::Get().ValidSharedNativePointer(PluginScopedId);
+	}
+	else
+	{
+		NativeClient = ISocketIOClientModule::Get().NewValidNativePointer();
+	}
+
 	//Ensure we sync our native max/reconnection attempts before connecting
 	NativeClient->MaxReconnectionAttempts = MaxReconnectionAttempts;
 	NativeClient->ReconnectionDelay = ReconnectionDelayInMs;
