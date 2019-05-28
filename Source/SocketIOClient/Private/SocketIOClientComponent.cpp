@@ -360,6 +360,10 @@ void USocketIOClientComponent::Connect(const FString& InAddressAndPort, USIOJson
 		HeadersFJson = Headers->GetRootObject();
 	}
 
+	//-------------------------------------------------------------------------------------------
+	// WORKAROUND for repeated connect/disconnect
+	ClearCallbacks();
+
 	//If we're a regular connection we should close and release when we quit
 	if (NativeClient&&!bPluginScopedConnection)
 	{
@@ -376,6 +380,8 @@ void USocketIOClientComponent::Connect(const FString& InAddressAndPort, USIOJson
 	{
 		NativeClient = ISocketIOClientModule::Get().NewValidNativePointer();
 	}
+	SetupCallbacks();
+	//-------------------------------------------------------------------------------------------
 
 	//Ensure we sync our native max/reconnection attempts before connecting
 	NativeClient->MaxReconnectionAttempts = MaxReconnectionAttempts;
