@@ -23,6 +23,7 @@
 #define ASIO_STANDALONE
 #define _WEBSOCKETPP_CPP11_STL_
 
+#include "SocketIOLib.h"
 #include "sio_packet.h"
 #include <rapidjson/document.h>
 #include <rapidjson/encodedstream.h>

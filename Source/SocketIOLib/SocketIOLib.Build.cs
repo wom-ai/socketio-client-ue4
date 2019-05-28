@@ -15,7 +15,7 @@ namespace UnrealBuildTool.Rules
 
 	    public SocketIOLib(ReadOnlyTargetRules Target) : base(Target)
 	    {
-			PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+			PCHUsage = PCHUsageMode.NoSharedPCHs;
 			bUseRTTI = true;
 			bEnableExceptions = true;
 

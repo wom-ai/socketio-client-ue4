@@ -23,6 +23,7 @@
 #define ASIO_STANDALONE
 #define _WEBSOCKETPP_CPP11_STL_
 
+#include "SocketIOLib.h"
 #include "sio_client.h"
 #include "internal/sio_client_impl.h"
 
