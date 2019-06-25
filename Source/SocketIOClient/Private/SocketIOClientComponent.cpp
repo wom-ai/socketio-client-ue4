@@ -497,6 +497,10 @@ void USocketIOClientComponent::EmitNative(const FString& EventName, UStruct* Str
 {
 	EmitNative(EventName, USIOJConvert::ToJsonObject(Struct, (void*)StructPtr), CallbackFunction, Namespace);
 }
+void USocketIOClientComponent::EmitRawBinary(const FString& EventName, uint8* Data, int32 DataLength, const FString& Namespace /*= TEXT("/")*/)
+{
+	NativeClient->EmitRawBinary(EventName, Data, DataLength, Namespace);
+}
 
 #if PLATFORM_WINDOWS
 #pragma endregion Emit

@@ -318,6 +318,20 @@ public:
 					const FString& Namespace = FString(TEXT("/")));
 
 	/**
+	* Emit an optimized binary message
+	*
+	* @param EventName				Event name
+	* @param Data					Buffer Pointer
+	* @param DataLength				Buffer size
+	* @param Namespace				Optional Namespace within socket.io
+	*/
+	void EmitRawBinary(
+					const FString& EventName,
+					uint8* Data,
+					int32 DataLength,
+					const FString& Namespace = TEXT("/"));
+
+	/**
 	* Call function callback on receiving socket event. C++ only.
 	*
 	* @param EventName	Event name
